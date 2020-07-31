@@ -1,0 +1,26 @@
+{
+  "name": "weather_journal",
+  "version": "1.0.0",
+  "description": "## Overview This project requires you to create an asynchronous javascript web app that uses Web API and user data to dynamically update the UI. The app uses async fetch API in order to get the weather information for a specific zip code and then returns and saves the information to the local Express.js API endpoint. Finally, it updates the UI with the results.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhiteHatJoker/weather-journal-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WhiteHatJoker/weather-journal-app/issues"
+  },
+  "homepage": "https://github.com/WhiteHatJoker/weather-journal-app#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
