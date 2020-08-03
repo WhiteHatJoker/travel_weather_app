@@ -14,10 +14,13 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('dist'));
 
+const axios = require('axios');
+
 const port = 8081;
 // Setup Server
 const listening = () => console.log(`Server is up and running on port ${port}`)
 const server = app.listen(port, listening);
+
 
 
 app.post('/addWeather', (req, res) => {
