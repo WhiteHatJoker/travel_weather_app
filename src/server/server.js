@@ -14,7 +14,7 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('dist'));
 
-const port = 8888;
+const port = 8081;
 // Setup Server
 const listening = () => console.log(`Server is up and running on port ${port}`)
 const server = app.listen(port, listening);
