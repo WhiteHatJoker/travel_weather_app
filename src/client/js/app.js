@@ -1,20 +1,6 @@
-/* Global Variables */
-const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey = '&appid=9652e6a7ce1639d72b41c6a8cde321d3&units=imperial';
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-
-/* Function to get weather data from Openweather API */
-const getWeatherData = async (baseUrl, zipCode, apiKey) => {
-    const response = await fetch(baseUrl+zipCode+apiKey);
-    try {
-        const data = await response.json();
-        return data;
-    } catch(error) {
-        console.log("error", error);
-    }
-};
 
 
 /* Function to POST data to express */
@@ -51,19 +37,20 @@ const updateUI = async () => {
 
 const performAction = (e) => {
     let zipCode = document.getElementById('zip').value;
-    let feelings =  document.getElementById('feelings').value;
+    let location =  document.getElementById('location').value;
 
-    getWeatherData(baseUrl,zipCode, apiKey)
-    .then(function(data) {
-        postData('/addWeather', {
-            temp:data.main.temp, 
-            date:newDate, 
-            feelings:feelings
-        })
+    postData('/sendToApis', {
+        date:newDate, 
+        location:location
+    }).then(function(data){
+        console.log(data);
+        
     })
-    .then(function() {
-        updateUI();
-    });
+    // .then(function() {
+    //     updateUI();
+    // });
+
+
 };
 
-export { baseUrl, apiKey, getWeatherData, postData, updateUI, performAction }
+export { postData, updateUI, performAction }
