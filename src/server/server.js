@@ -31,7 +31,7 @@ app.listen(8081, function () {
     console.log('Server is up and running on port 8081!');
 });
 
-const apiRequestsChain = async (location, date) => {
+const apiRequestsChain = async (location) => {
     try {
         const geoNamesApiRequest = await axios.get(`${geonamesApiUrl}&q=${location}&username=${geonamesUser}`);
         cityData = geoNamesApiRequest.data.geonames[0];
@@ -50,10 +50,9 @@ const apiRequestsChain = async (location, date) => {
 }
 
 app.post('/sendToApis', (req, res) => {
-    const travelDate = req.body.date;
     const location = req.body.location;
 
-    apiRequestsChain(location, travelDate).then(function() {
+    apiRequestsChain(location).then(function() {
         res.send({
             "cityData": cityData,
             "weatherData": weatherData,

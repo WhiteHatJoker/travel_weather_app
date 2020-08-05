@@ -54,7 +54,8 @@ const performAction = (e) => {
     let currentDate = new Date();
     // let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
     let maxForecastDate = new Date();
-    maxForecastDate.setDate(currentDate.getDate() +15);
+    maxForecastDate.setDate(maxForecastDate.getDate()+15);
+    console.log(maxForecastDate);
 
 
     if (!location) {
@@ -69,13 +70,12 @@ const performAction = (e) => {
         displayMessage('<p>Please enter the future date</p>');
         error = true;
     } else if (travelDate>maxForecastDate) {
-        displayMessage(`<p>You cannot choose the date more than ${maxForecastDate.getMonth()}/${maxForecastDate.getDate()}/${maxForecastDate.getFullYear()}. Please come back minimum two weeks before your departure</p>`);
+        displayMessage(`<p>You cannot choose the date more than ${maxForecastDate.toDateString()}. Please come back minimum two weeks before your departure</p>`);
         error=true;
     }
 
     if (!error) {
         postData('/sendToApis', {
-            date:travelDate, 
             location:location
         }).then(function(data){
             console.log(data);
