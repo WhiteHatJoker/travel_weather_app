@@ -1,20 +1,16 @@
-const findDateIndex = (weatherDatesArray, travelDate) => {
-    const searchFormattedDate = travelDate.toISOString().split('T')[0];
-    return weatherDatesArray.findIndex( (weatherData) => weatherData.datetime == searchFormattedDate);
-}
-
+// Reset error message
 const resetErrorDiv = () => {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.innerHTML = '';
 }
 
-
+// Display error messages if information entered incorrectly
 const displayMessage = (message) => {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.innerHTML += message;
 }
 
-/* Function to POST data to express */
+// Function to post the city name to Express for API requests
 const postData = async ( url = '', data = {})=>{
     const response = await fetch(url, {
         method: 'POST',
@@ -33,22 +29,53 @@ const postData = async ( url = '', data = {})=>{
     }
 };
 
-/* Update the view with information */
-const updateUI = async () => {
-    const request = await fetch('/all');
+// After the date is returned for 16 days from now find the travel date in the data returned
+const findDateIndex = (weatherDatesArray, travelDate) => {
+    const searchFormattedDate = travelDate.toISOString().split('T')[0];
+    return weatherDatesArray.findIndex( (weatherData) => weatherData.datetime == searchFormattedDate);
+}
+
+// Update the view with city information
+const showCityInfo = (cityInfo) => {
     try{
-        const allData = await request.json();
-        document.getElementById('date').innerHTML = allData.date;
-        document.getElementById('temp').innerHTML = allData.temp;
-        document.getElementById('content').innerHTML = allData.userFeelings;
+        console.log(cityInfo);
+        // document.getElementById('date').innerHTML = allData.date;
+        // document.getElementById('temp').innerHTML = allData.temp;
+        // document.getElementById('content').innerHTML = allData.userFeelings;
     } catch(error) {
         console.log("error", error);
     }
 };
 
+// Update the view with weather information
+const showWeatherInfo = (weatherData, dataIndex) => {
+    try{
+        console.log(weatherData);
+        // document.getElementById('date').innerHTML = allData.date;
+        // document.getElementById('temp').innerHTML = allData.temp;
+        // document.getElementById('content').innerHTML = allData.userFeelings;
+    } catch(error) {
+        console.log("error", error);
+    }
+};
+
+// Update the view with the picture
+const showPicture = (pictures) => {
+    try{
+        console.log(pictures);
+        // document.getElementById('date').innerHTML = allData.date;
+        // document.getElementById('temp').innerHTML = allData.temp;
+        // document.getElementById('content').innerHTML = allData.userFeelings;
+    } catch(error) {
+        console.log("error", error);
+    }
+};
+
+// Main app function
 const performAction = (e) => {
     e.preventDefault();
     resetErrorDiv();
+
     let error = false;
 
     let location =  document.getElementById('location').value;
@@ -57,11 +84,9 @@ const performAction = (e) => {
     travelDate = new Date(travelDate);
 
     let currentDate = new Date();
-    // let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
     let maxForecastDate = new Date();
     maxForecastDate.setDate(maxForecastDate.getDate()+15);
-    console.log(maxForecastDate);
-
 
     if (!location) {
         displayMessage('<p>Please enter the city where you are traveling to</p>');
@@ -85,7 +110,9 @@ const performAction = (e) => {
         }).then(function(data){
             console.log(data, travelDate);
             const weatherDataIndex = findDateIndex(data.weatherData, travelDate);
-            updateUI(data, weatherDataIndex); 
+            showCityInfo(data.cityData);
+            showWeatherInfo(data.weatherData, weatherDataIndex);
+            showPicture(data.imageData);
         })
     }
 
@@ -93,4 +120,4 @@ const performAction = (e) => {
 
 };
 
-export { findDateIndex, displayMessage, postData, updateUI, performAction }
+export { resetErrorDiv, displayMessage, postData, findDateIndex, showCityInfo, showWeatherInfo, showPicture, performAction }
