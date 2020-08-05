@@ -1,7 +1,13 @@
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+const resetErrorDiv = () => {
+    const errorDiv = document.getElementById('errorMessage');
+    errorDiv.innerHTML = '';
+}
 
+
+const displayMessage = (message) => {
+    const errorDiv = document.getElementById('errorMessage');
+    errorDiv.innerHTML += message;
+}
 
 /* Function to POST data to express */
 const postData = async ( url = '', data = {})=>{
@@ -36,21 +42,53 @@ const updateUI = async () => {
 };
 
 const performAction = (e) => {
-    let zipCode = document.getElementById('zip').value;
+    e.preventDefault();
+    resetErrorDiv();
+    let error = false;
+
     let location =  document.getElementById('location').value;
 
-    postData('/sendToApis', {
-        date:newDate, 
-        location:location
-    }).then(function(data){
-        console.log(data);
-        
-    })
-    // .then(function() {
-    //     updateUI();
-    // });
+    let travelDate = document.getElementById('travelDate').value;
+    travelDate = new Date(travelDate);
+
+    let currentDate = new Date();
+    // let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+    let maxForecastDate = new Date();
+    maxForecastDate.setDate(currentDate.getDate() +15);
+
+
+    if (!location) {
+        displayMessage('<p>Please enter the city where you are traveling to</p>');
+        error = true;
+    }
+
+    if (!travelDate) {
+        displayMessage('<p>Please enter the travel date</p>');
+        error = true;
+    } else if (travelDate<currentDate) {
+        displayMessage('<p>Please enter the future date</p>');
+        error = true;
+    } else if (travelDate>maxForecastDate) {
+        displayMessage(`<p>You cannot choose the date more than ${maxForecastDate.getMonth()}/${maxForecastDate.getDate()}/${maxForecastDate.getFullYear()}. Please come back minimum two weeks before your departure</p>`);
+        error=true;
+    }
+
+    if (!error) {
+        postData('/sendToApis', {
+            date:travelDate, 
+            location:location
+        }).then(function(data){
+            console.log(data);
+            
+        })
+        // .then(function() {
+        //     updateUI();
+        // });
+
+    }
+
 
 
 };
 
-export { postData, updateUI, performAction }
+export { displayMessage, postData, updateUI, performAction }

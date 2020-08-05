@@ -11,15 +11,16 @@
     Weather Journal App
   </div>
   <div class ="holder feel">
-    <label for="location">Where are you traveling to?</label>
-    <input type="text" id="location" placeholder="Enter the city name" required>
-  </div>
-  <div class ="holder zip">
-    <div class="zip-form">
-      <label for="zip">Enter Zipcode here</label>
-      <input type="text" id="zip" placeholder="enter zip code here">
-    </div>
-    <button id="generate" type = "submit"> Generate </button>
+    <div id="errorMessage"></div>
+    <form>
+      <label for="location">Where are you traveling to?</label>
+      <input type="text" id="location" placeholder="Enter the city name" required />
+      
+      <label for="travelDate">Enter your departure date</label>
+      <input type="date" id="travelDate" required>
+
+      <button id="generate" type="submit">Get city information</button>
+    </form>
   </div>
   <div class ="holder entry">
     <div class = "title">Most Recent Entry</div>
