@@ -1,3 +1,8 @@
+const findDateIndex = (weatherDatesArray, travelDate) => {
+    const searchFormattedDate = travelDate.toISOString().split('T')[0];
+    return weatherDatesArray.findIndex( (weatherData) => weatherData.datetime == searchFormattedDate);
+}
+
 const resetErrorDiv = () => {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.innerHTML = '';
@@ -78,17 +83,14 @@ const performAction = (e) => {
         postData('/sendToApis', {
             location:location
         }).then(function(data){
-            console.log(data);
-            
+            console.log(data, travelDate);
+            const weatherDataIndex = findDateIndex(data.weatherData, travelDate);
+            updateUI(data, weatherDataIndex); 
         })
-        // .then(function() {
-        //     updateUI();
-        // });
-
     }
 
 
 
 };
 
-export { displayMessage, postData, updateUI, performAction }
+export { findDateIndex, displayMessage, postData, updateUI, performAction }

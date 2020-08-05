@@ -1,8 +1,8 @@
 import './styles/style.scss'
 
-import { displayMessage, postData ,updateUI, performAction } from './js/app.js'
+import { findDateIndex, displayMessage, postData ,updateUI, performAction } from './js/app.js'
 
 
 document.getElementById('generate').addEventListener('click', performAction);
 
-export { displayMessage, postData, updateUI, performAction }
+export { findDateIndex, displayMessage, postData, updateUI, performAction }
