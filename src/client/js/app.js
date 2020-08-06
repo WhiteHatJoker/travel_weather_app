@@ -120,4 +120,4 @@ const performAction = (e) => {
 
 };
 
-export { resetErrorDiv, displayMessage, postData, findDateIndex, showCityInfo, showWeatherInfo, showPicture, performAction }
+export { performAction }
