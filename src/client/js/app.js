@@ -57,7 +57,7 @@ const showCityInfo = (cityInfo) => {
 
 // Update the view with weather information
 const showWeatherInfo = (weatherData) => {
-    let weatherTable = '<tr><th>Date</th><th>Feels Max/Min</th><th>Weather</th><th>Precipitation</th><th>Humidity</th><th>Wind</th><th>UV Index</th><th>Pressure</th></tr>';
+    let weatherTable = '<tr><th>Date</th><th>Feels</th><th>Weather</th><th>Prec.</th><th>Humidity</th><th>Wind</th><th>UV</th><th>Pressure</th></tr>';
     try{
 
         weatherData.forEach(dayWeather => {
@@ -67,14 +67,12 @@ const showWeatherInfo = (weatherData) => {
             weatherTable += `<td>${dayWeather.pop}%</td>`;
             weatherTable += `<td>${dayWeather.rh}%</td>`;
             weatherTable += `<td>${dayWeather.wind_cdir} at ${Math.round(dayWeather.wind_spd)}m/s</td>`;
-            weatherTable += `<td>${dayWeather.uv}</td>`;
-            weatherTable += `<td>${dayWeather.pres}mb</td></tr>`;
+            weatherTable += `<td>${Math.round(dayWeather.uv)}</td>`;
+            weatherTable += `<td>${Math.round(dayWeather.pres)}mb</td></tr>`;
         });
 
         document.getElementById('weatherForecast').innerHTML = weatherTable;
-        // document.getElementById('date').innerHTML = allData.date;
-        // document.getElementById('temp').innerHTML = allData.temp;
-        // document.getElementById('content').innerHTML = allData.userFeelings;
+
     } catch(error) {
         console.log("error", error);
     }
@@ -132,10 +130,9 @@ const performAction = (e) => {
             showCityInfo(data.cityData);
             showWeatherInfo(weatherForecastFromTravel);
             showPicture(data.imageData);
+            document.querySelector('main').style.display='flex';
         })
     }
-
-
 
 };
 

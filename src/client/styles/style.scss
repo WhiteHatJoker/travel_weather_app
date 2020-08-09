@@ -14,7 +14,7 @@ h1 {
 #app{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 800px auto 60px;
+    grid-template-rows: 800px auto 200px;
     grid-template-areas: 
     "bn bn bn bn bn bn bn bn bn bn bn bn"
     "main main main main main main main main main main main main"
@@ -56,11 +56,10 @@ header {
         text-transform: capitalize;
     }    
 
-
-
     h2 {
         text-transform: capitalize;
         font-size:2.5em;
+        text-align: center;
     }
 
     form {
@@ -134,6 +133,7 @@ main {
     align-items: center;
     background-image: linear-gradient(#e4edf6, $main-color);
     padding-top: 25px;
+    display: none;
 
 
     .cityInfo {
@@ -155,7 +155,7 @@ main {
 }
 
 #weatherForecast {
-    margin-top: 45px;
+    margin: 45px 0;
     border: 1px solid white;
 
     .weatherIcon {
@@ -177,6 +177,16 @@ main {
 
 footer {
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    flex-direction: column;
+
+    p {
+        margin-bottom: 30px;
+        text-align: center;
+    }
 }
 
 
