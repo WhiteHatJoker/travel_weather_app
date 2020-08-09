@@ -2,6 +2,7 @@
 const resetErrorDiv = () => {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.innerHTML = '';
+    errorDiv.style.visibility = 'hidden';
 }
 
 // Display error messages if information entered incorrectly
@@ -31,9 +32,10 @@ const postData = async ( url = '', data = {})=>{
 };
 
 // After the date is returned for 16 days from now find the travel date in the data returned
-const findDateIndex = (weatherDatesArray, travelDate) => {
+const getTravelDateWeather = (unfiltedWeatherForecasts, travelDate) => {
     const searchFormattedDate = travelDate.toISOString().split('T')[0];
-    return weatherDatesArray.findIndex( (weatherData) => weatherData.datetime == searchFormattedDate);
+    const travelDateWeatherIndex = unfiltedWeatherForecasts.findIndex( (weatherData) => weatherData.datetime == searchFormattedDate);
+    return unfiltedWeatherForecasts.slice(travelDateWeatherIndex);
 }
 
 // Update the view with city information
@@ -55,9 +57,21 @@ const showCityInfo = (cityInfo) => {
 };
 
 // Update the view with weather information
-const showWeatherInfo = (weatherData, dataIndex) => {
+const showWeatherInfo = (weatherData) => {
+    let weatherTable = '<tr><th>Feels Max/Min</th><th>Weather</th><th>Precipitation</th><td>Humidity</th><th>Wind</th><th>UV Index</th><th>Pressure</th></tr>';
     try{
-        console.log(weatherData);
+
+        weatherData.forEach(dayWeather => {
+            weatherTable += `<tr><td>${Math.round(dayWeather.app_max_temp)}&deg;/${Math.round(dayWeather.app_min_temp)}</td>`;
+            weatherTable += `<td><img src="https://www.weatherbit.io/static/img/icons/${dayWeather.weather.icon}.png" /> ${dayWeather.weather.description}</td>`;
+            weatherTable += `<td>${dayWeather.pop}%</td>`;
+            weatherTable += `<td>${dayWeather.rh}%</td>`;
+            weatherTable += `<td>${dayWeather.wind_cdir} at ${Math.round(dayWeather.wind_spd)}m/s</td>`;
+            weatherTable += `<td>${dayWeather.uv}</td>`;
+            weatherTable += `<td>${dayWeather.pres}mb</td></tr>`;
+        });
+
+        document.getElementById('weatherForecast').innerHTML = weatherTable;
         // document.getElementById('date').innerHTML = allData.date;
         // document.getElementById('temp').innerHTML = allData.temp;
         // document.getElementById('content').innerHTML = allData.userFeelings;
@@ -69,7 +83,6 @@ const showWeatherInfo = (weatherData, dataIndex) => {
 // Update the view with the picture
 const showPicture = (pictures) => {
     try{
-        console.log(pictures);
         if (pictures) {
             document.getElementById('cityPic').innerHTML = `<img src="${pictures[0].webformatURL}" alt="${pictures[0].tags}" width="640" />`;
         }
@@ -115,9 +128,9 @@ const performAction = (e) => {
         postData('/sendToApis', {
             location:location
         }).then(function(data){
-            const weatherDataIndex = findDateIndex(data.weatherData, travelDate);
+            const weatherForecastFromTravel = getTravelDateWeather(data.weatherData, travelDate);
             showCityInfo(data.cityData);
-            showWeatherInfo(data.weatherData, weatherDataIndex);
+            showWeatherInfo(weatherForecastFromTravel);
             showPicture(data.imageData);
         })
     }

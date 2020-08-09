@@ -1,5 +1,8 @@
+$main-color: #55baf9;
+$main-text-color: white;
+
 body{
-    background: #b6d5ea;
+    background: $main-color;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -9,7 +12,7 @@ body{
     grid-template-rows: 800px auto 60px;
     grid-template-areas: 
     "bn bn bn bn bn bn bn bn bn bn bn bn"
-    "city city city cityw wth wth wth wth wth wth wth wth"
+    "main main main main main main main main main main main main"
     "ft ft ft ft ft ft ft ft ft ft ft ft";
     justify-content: center;
     grid-gap: 1em;
@@ -20,12 +23,8 @@ body{
         grid-area: bn;
     }
 
-    #cityInfo {
-        grid-area: city;
-    }
-
-    #weatherInfo {
-        grid-area: wth;
+    main {
+        grid-area: main;
     }
 
     footer {
@@ -41,7 +40,7 @@ header {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: white;
+    color: $main-text-color;
 
     h1, h2, label {
         margin-bottom: 25px;
@@ -75,7 +74,7 @@ header {
         display:block;
         height: 60px;
         width: 400px;
-        background:white;
+        background:$main-text-color;
         color: #1c8ad7;
         font-size: 20px;
         font-family: 'Oswald', sans-serif;
@@ -109,8 +108,8 @@ header {
     button{
         width: 400px;
         height: 65px;
-        background: #1c8ad7;
-        color: white;
+        background: $main-color;
+        color: $main-text-color;
         font-size: 26px;
         font-family: 'Oswald', sans-serif;
         border: none;
@@ -128,28 +127,18 @@ header {
 }
 
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(white, $main-color);
 
-#entryHolder{
-
+    .cityInfo {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
 }
-
-#date{
-
-}
-
-#temp{
-
-}
-
-#content{
-
-}
-
-.title{
-
-}
-
-/*  Basic Styling To Override Default For Basic HTML Elements */
 
 
 
