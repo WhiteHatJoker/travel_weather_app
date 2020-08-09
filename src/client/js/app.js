@@ -136,4 +136,4 @@ const performAction = (e) => {
 
 };
 
-export { performAction }
+export { getTravelDateWeather, performAction }
