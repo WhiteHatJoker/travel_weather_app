@@ -62,3 +62,14 @@ app.post('/sendToApis', (req, res) => {
 
 });
 
+
+// GET data for Test
+app.get('/getData', (req, res) => {
+    res.status(200).send({
+        "cityData": cityData,
+        "weatherData": weatherData,
+        "imageData": imageData
+    });
+});
+
+module.exports = app;
