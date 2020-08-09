@@ -9,7 +9,7 @@ body{
     grid-template-rows: 800px auto 60px;
     grid-template-areas: 
     "bn bn bn bn bn bn bn bn bn bn bn bn"
-    "city city city wth wth wth wth wth wth wth wth wth"
+    "city city city cityw wth wth wth wth wth wth wth wth"
     "ft ft ft ft ft ft ft ft ft ft ft ft";
     justify-content: center;
     grid-gap: 1em;
@@ -22,12 +22,10 @@ body{
 
     #cityInfo {
         grid-area: city;
-        width: 100%;
     }
 
     #weatherInfo {
         grid-area: wth;
-        width: 100%;
     }
 
     footer {

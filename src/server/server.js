@@ -4,11 +4,11 @@ let weatherData = {};
 let imageData = {};
 const dotenv = require('dotenv');
 dotenv.config();
-const geonamesApiUrl = "http://api.geonames.org/search?maxRows=1&type=json&style=short";
+const geonamesApiUrl = "http://api.geonames.org/search?maxRows=1&type=json&style=medium";
 const geonamesUser = process.env.GEONAMES_USERNAME;
 const weatherbitApiUrl = "http://api.weatherbit.io/v2.0/forecast/daily";
 const weatherbitKey = process.env.WEATHERBIT_API_KEY;
-const pixabayApiUrl = "https://pixabay.com/api/?image_type=photo&editors_choice=true"
+const pixabayApiUrl = "https://pixabay.com/api/?image_type=photo&min_width=600"
 const pixabayKey = process.env.PIXABAY_API_KEY;
 // Setup Express
 const express = require('express');

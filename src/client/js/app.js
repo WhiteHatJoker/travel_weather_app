@@ -39,10 +39,16 @@ const findDateIndex = (weatherDatesArray, travelDate) => {
 // Update the view with city information
 const showCityInfo = (cityInfo) => {
     try{
-        console.log(cityInfo);
-        // document.getElementById('date').innerHTML = allData.date;
-        // document.getElementById('temp').innerHTML = allData.temp;
-        // document.getElementById('content').innerHTML = allData.userFeelings;
+        if (cityInfo) {
+            console.log(cityInfo);
+            document.querySelector('#cityName h1').innerText = `${cityInfo.name}`;
+            document.querySelector('#regionName span').innerText = `${cityInfo.adminName1}`;
+            document.querySelector('#countryName span').innerText = `${cityInfo.countryName}`;
+            document.querySelector('#population span').innerText = `${cityInfo.population}`;
+            document.querySelector('#latitude span').innerText = `${cityInfo.lat}`;
+            document.querySelector('#longtitude span').innerText = `${cityInfo.lng}`;
+        }
+
     } catch(error) {
         console.log("error", error);
     }
@@ -64,9 +70,9 @@ const showWeatherInfo = (weatherData, dataIndex) => {
 const showPicture = (pictures) => {
     try{
         console.log(pictures);
-        // document.getElementById('date').innerHTML = allData.date;
-        // document.getElementById('temp').innerHTML = allData.temp;
-        // document.getElementById('content').innerHTML = allData.userFeelings;
+        if (pictures) {
+            document.getElementById('cityPic').innerHTML = `<img src="${pictures[0].webformatURL}" alt="${pictures[0].tags}" width="640" />`;
+        }
     } catch(error) {
         console.log("error", error);
     }
@@ -109,7 +115,6 @@ const performAction = (e) => {
         postData('/sendToApis', {
             location:location
         }).then(function(data){
-            console.log(data, travelDate);
             const weatherDataIndex = findDateIndex(data.weatherData, travelDate);
             showCityInfo(data.cityData);
             showWeatherInfo(data.weatherData, weatherDataIndex);
