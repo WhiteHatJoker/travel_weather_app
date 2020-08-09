@@ -8,6 +8,7 @@ const resetErrorDiv = () => {
 const displayMessage = (message) => {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.innerHTML += message;
+    errorDiv.style.visibility = "visible";
 }
 
 // Function to post the city name to Express for API requests
