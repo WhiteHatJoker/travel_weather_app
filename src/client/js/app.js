@@ -42,7 +42,6 @@ const getTravelDateWeather = (unfiltedWeatherForecasts, travelDate) => {
 const showCityInfo = (cityInfo) => {
     try{
         if (cityInfo) {
-            console.log(cityInfo);
             document.querySelector('#cityName h1').innerText = `${cityInfo.name}`;
             document.querySelector('#regionName span').innerText = `${cityInfo.adminName1}`;
             document.querySelector('#countryName span').innerText = `${cityInfo.countryName}`;
@@ -58,12 +57,13 @@ const showCityInfo = (cityInfo) => {
 
 // Update the view with weather information
 const showWeatherInfo = (weatherData) => {
-    let weatherTable = '<tr><th>Feels Max/Min</th><th>Weather</th><th>Precipitation</th><td>Humidity</th><th>Wind</th><th>UV Index</th><th>Pressure</th></tr>';
+    let weatherTable = '<tr><th>Date</th><th>Feels Max/Min</th><th>Weather</th><th>Precipitation</th><th>Humidity</th><th>Wind</th><th>UV Index</th><th>Pressure</th></tr>';
     try{
 
         weatherData.forEach(dayWeather => {
-            weatherTable += `<tr><td>${Math.round(dayWeather.app_max_temp)}&deg;/${Math.round(dayWeather.app_min_temp)}</td>`;
-            weatherTable += `<td><img src="https://www.weatherbit.io/static/img/icons/${dayWeather.weather.icon}.png" /> ${dayWeather.weather.description}</td>`;
+            weatherTable += `<tr><td>${dayWeather.datetime}</td>`;
+            weatherTable += `<td>${Math.round(dayWeather.app_max_temp)}&deg;/${Math.round(dayWeather.app_min_temp)}</td>`;
+            weatherTable += `<td><img class="weatherIcon" src="https://www.weatherbit.io/static/img/icons/${dayWeather.weather.icon}.png" /> ${dayWeather.weather.description}</td>`;
             weatherTable += `<td>${dayWeather.pop}%</td>`;
             weatherTable += `<td>${dayWeather.rh}%</td>`;
             weatherTable += `<td>${dayWeather.wind_cdir} at ${Math.round(dayWeather.wind_spd)}m/s</td>`;
@@ -84,7 +84,7 @@ const showWeatherInfo = (weatherData) => {
 const showPicture = (pictures) => {
     try{
         if (pictures) {
-            document.getElementById('cityPic').innerHTML = `<img src="${pictures[0].webformatURL}" alt="${pictures[0].tags}" width="640" />`;
+            document.getElementById('cityPic').innerHTML = `<img class="pic" src="${pictures[0].webformatURL}" alt="${pictures[0].tags}" />`;
         }
     } catch(error) {
         console.log("error", error);

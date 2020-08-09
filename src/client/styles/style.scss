@@ -4,6 +4,11 @@ $main-text-color: white;
 body{
     background: $main-color;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: $main-text-color;
+}
+
+h1 {
+    font-size: 4em;
 }
 
 #app{
@@ -15,7 +20,6 @@ body{
     "main main main main main main main main main main main main"
     "ft ft ft ft ft ft ft ft ft ft ft ft";
     justify-content: center;
-    grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 
@@ -40,7 +44,6 @@ header {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: $main-text-color;
 
     h1, h2, label {
         margin-bottom: 25px;
@@ -53,9 +56,7 @@ header {
         text-transform: capitalize;
     }    
 
-    h1 {
-        font-size: 4em;
-    }
+
 
     h2 {
         text-transform: capitalize;
@@ -131,14 +132,51 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(white, $main-color);
+    background-image: linear-gradient(#e4edf6, $main-color);
+    padding-top: 25px;
+
 
     .cityInfo {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        text-align: center;
+    }
+
+    .pic {
+        width: 640px;
+        border-radius: 20px;
+        border: 10px solid white;
+    }
+
+    .cityInfo div {
+        margin-bottom: 15px;
     }
 }
 
+#weatherForecast {
+    margin-top: 45px;
+    border: 1px solid white;
+
+    .weatherIcon {
+        width: 50px;
+    }
+
+    th, td {
+        padding: 10px;
+        border-left: 1px solid white;
+        border-right:1px solid white;
+    }
+
+    th {
+        border-bottom: 1px solid white;
+        font-weight: bold;
+    }
+}
+
+
+footer {
+    background-color: black;
+}
 
 
