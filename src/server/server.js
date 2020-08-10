@@ -4,6 +4,7 @@ let weatherData = {};
 let imageData = {};
 const dotenv = require('dotenv');
 dotenv.config();
+
 const geonamesApiUrl = "http://api.geonames.org/search?maxRows=1&type=json&style=medium";
 const geonamesUser = process.env.GEONAMES_USERNAME;
 const weatherbitApiUrl = "http://api.weatherbit.io/v2.0/forecast/daily";

@@ -29,3 +29,7 @@ npm i
 [Service workers]
 
 [Express and Nodejs]
+
+## Notes
+
+API Keys are currently in the `.env` file. 
